@@ -1,6 +1,6 @@
 # 🧪 DataEngineeringII Project – Group 17
 
-## ⚙️ Demonstration of Horizontal Scaling with Lightweight Virtualization for Large-Scale Unit Test Analysis of Open-Source Projects
+### ⚙️ Demonstration of Horizontal Scaling with Lightweight Virtualization for Large-Scale Unit Test Analysis of Open-Source Projects
 
 ### 🔑 Key Words  
 **Distributed Computing Infrastructures**, **Scalability**, **Orchestration**, **Software Deployment**
@@ -58,24 +58,32 @@ This repository contains a Python-based crawler that uses the GitHub REST API to
 ```bash
 git clone https://github.com/yuegracezhou/DataEngineeringII.git
 cd DataEngineeringII
+```
 
 ### 2. Create and Activate Virtual Environment
 
+```
 python3 -m venv github_env
 source github_env/bin/activate
-
+```
 ### 3. Install Dependencies
 
+```
 pip install -r requirements.txt
+```
 
 ### 4. Run the Crawler
 
-python crawler.py
+```
+python github_crawler.py
+```
 
 ### Output
 
-filtered_projects.json
-
+```
+projects.json
+downloaded_projects
+```
 ---
 
 📌 **Requires Python 3.10 or above**  
