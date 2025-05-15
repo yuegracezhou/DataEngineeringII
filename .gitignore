@@ -2,6 +2,7 @@
 github_env/
 venv/
 .env/
+.env
 
 # Python 缓存
 __pycache__/
