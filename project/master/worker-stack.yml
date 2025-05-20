@@ -1,0 +1,13 @@
+# worker-stack.yaml
+services:
+  worker:
+    image: fredrikforsman15/de2:latest # Or your specific worker image
+    environment:
+      RABBITMQ_HOST: "192.168.2.97"    # IP of your RabbitMQ Broker VM
+      RABBITMQ_QUEUE: "project_queue"
+    deploy:
+      replicas: 4 # Example: Set the total number of desired worker instances
+      restart_policy:
+        condition: on-failure
+      placement:
+        max_replicas_per_node: 2 # <<< This line limits each node to a maximum of 2 instances of this worker service
