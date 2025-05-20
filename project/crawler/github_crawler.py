@@ -19,7 +19,7 @@ HEADERS = {
 
 REPO_SEARCH_URL = "https://api.github.com/search/repositories"
 CODE_SEARCH_URL = "https://api.github.com/search/code"
-TOTAL_REPOS = 1000
+TOTAL_REPOS = 10
 PER_PAGE = 100
 JSON_FILENAME = "projects.json"
 

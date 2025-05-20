@@ -12,7 +12,7 @@ load_dotenv(dotenv_path=".env")
 RABBITMQ_HOST = os.getenv("RABBITMQ_HOST", "localhost")
 RABBITMQ_QUEUE = os.getenv("RABBITMQ_QUEUE", "project_queue")
 # This is the name of the file expected inside the container
-INPUT_JSON_FILENAME = "../master/projects.json"
+INPUT_JSON_FILENAME = "projects.json"
 
 def send_json_to_rabbitmq():
     input_file_path = os.path.join("/app", INPUT_JSON_FILENAME) # Assuming WORKDIR /app

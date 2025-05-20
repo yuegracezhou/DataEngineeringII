@@ -1,12 +1,12 @@
 FROM python:3.11-slim
 WORKDIR /app
 
-#Installing python dependencies
+# Install Python dependencies
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-#Copy the crawler code
-COPY github_crawler.py clone_url.py ./
+# Copy the publisher script
+COPY publisher.py ./
 
-CMD ["python", "github_crawler.py"]
-
+# Set the command to run the publisher script
+CMD ["python", "publisher.py"]
