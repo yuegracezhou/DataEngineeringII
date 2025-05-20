@@ -1,0 +1,11 @@
+version: '3.8' # Specifies the version of the Docker Compose file format
+
+services:
+  rabbitmq:
+    image: rabbitmq:management # Uses the official RabbitMQ image with the management plugin
+    container_name: rabbitmq_broker_service # A custom name for your container
+    hostname: my-rabbit # Hostname inside the Docker network for RabbitMQ itself
+    ports:
+      - "5672:5672"  # Exposes AMQP port 5672 to the host VM
+      - "15672:15672" # Exposes Management UI port 15672 to the host VM
+    restart: unless-stopped # Restarts the container unless it's manually stopped
