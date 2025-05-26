@@ -15,6 +15,6 @@ COPY requirements.txt ./
 RUN pip3 install --no-cache-dir -r requirements.txt
 
 #Copy the worker(consumer) script
-COPY worker.py ./
+COPY newer_worker.py ./
 
-CMD ["python", "worker.py"]
+CMD ["python", "newer_worker.py"]

@@ -56,6 +56,8 @@ def send_json_to_rabbitmq():
             )
             published_count += 1
             print(f"[OK] Sent project to RabbitMQ: {project_data.get('full_name', 'Unknown Project')} ({published_count}/{len(projects)})")
+            if published_count >= 500:
+                break
         except Exception as e:
             print(f"[ERROR] Failed to send project {project_data.get('full_name', 'Unknown Project')} to RabbitMQ: {e}")
 

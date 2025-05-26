@@ -1,0 +1,10 @@
+version: '3'
+services:
+  crawler1:
+    build: .
+    env_file: .env.crawler1
+
+  crawler2:
+    build: .
+    env_file: .env.crawler2
+

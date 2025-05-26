@@ -178,4 +178,3 @@ def crawl_java_maven_projects():
 # ---------- 启动 ----------
 if __name__ == "__main__":
     crawl_java_maven_projects()
-

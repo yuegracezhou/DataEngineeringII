@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  crawler1:
+    build:
+      context: ./crawler/crawler_stream
+    container_name: crawler1
+    env_file:
+      - ./crawler/crawler_stream/.env.crawler1
+    networks:
+      - crawler_net
+
+  crawler2:
+    build:
+      context: ./crawler/crawler_stream
+    container_name: crawler2
+    env_file:
+      - ./crawler/crawler_stream/.env.crawler2
+    networks:
+      - crawler_net
+
+networks:
+  crawler_net:
+    external: true
+

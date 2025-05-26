@@ -10,7 +10,8 @@ services:
       # Add any other environment variables your worker script might need
     # Optional: You can mount volumes if you want to persist or inspect data
     # Make sure the host directories (e.g., ./cloned_projects_w1) exist first
-    # volumes:
+    volumes:
+      - ../test_summary:/summary
     #   - ./cloned_projects_w1:/work
     #   - ./test_results_w1:/results
     restart: unless-stopped
