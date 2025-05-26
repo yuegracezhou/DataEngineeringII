@@ -1,0 +1,26 @@
+version: '3'
+services:
+  crawler1:
+    build: .
+    environment:
+      - GITHUB_TOKEN=${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}
+      - RABBITMQ_HOST=broker
+      - RABBITMQ_QUEUE=project_queue
+      - START_PAGE=1
+      - PAGE_STEP=2
+      - TOTAL_REPOS=500
+    depends_on:
+      - broker
+
+  crawler2:
+    build: .
+    environment:
+      - GITHUB_TOKEN=${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}
+      - RABBITMQ_HOST=broker
+      - RABBITMQ_QUEUE=project_queue
+      - START_PAGE=2
+      - PAGE_STEP=2
+      - TOTAL_REPOS=500
+    depends_on:
+      - broker
+
