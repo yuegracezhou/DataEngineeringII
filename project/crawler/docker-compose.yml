@@ -3,7 +3,7 @@ services:
   publisher:
     build: .
     environment:
-      RABBITMQ_HOST: "${RABBITMQ_HOST_IP}"
-      RABBITMQ_QUEUE: "${RABBITMQ_DEFAULT_QUEUE}"
+      RABBITMQ_HOST: "192.168.2.68"
+      RABBITMQ_QUEUE: "project_queue"
     volumes:
       - ./projects.json:/app/projects.json
