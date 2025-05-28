@@ -1,10 +1,9 @@
-version: '3.8' # Specifies the version of the Docker Compose file format
-
+version: '3.8' 
 services:
   rabbitmq:
     image: rabbitmq:management # Uses the official RabbitMQ image with the management plugin
     container_name: rabbitmq_broker_service 
-    hostname: my-rabbit # Hostname inside the Docker network for RabbitMQ itself
+    hostname: my-rabbit # Hostname inside the Docker network
     ports:
       - "5672:5672"  
       - "15672:15672" 
