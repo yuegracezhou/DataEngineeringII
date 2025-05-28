@@ -1,6 +1,8 @@
 # 🧪 DataEngineeringII Project – Group 17
 
-Group members: Fredrik Forsman, Nathalie Borglund, Tingting Lyu, Yujia Liu, Yue Zhou
+Group Members: Fredrik Forsman, Tingting Lyu, Nathalie Borglund, Yujia Liu, Yue Zhou
+
+> Thank you all for your valuable contributions and great teamwork throughout the project!
 
 ## ⚙️ Goal
 
