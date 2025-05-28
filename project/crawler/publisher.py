@@ -5,13 +5,11 @@ import os
 from dotenv import load_dotenv
 
 # Load environment variables for RabbitMQ config
-# This assumes you might have a .env file in the /app directory of the container
-# or that RABBITMQ_HOST is set as an environment variable directly.
+# This assumes you might have a .env or that RABBITMQ_HOST is set as an environment variable directly.
 load_dotenv(dotenv_path=".env")
 
 RABBITMQ_HOST = os.getenv("RABBITMQ_HOST", "localhost")
 RABBITMQ_QUEUE = os.getenv("RABBITMQ_QUEUE", "project_queue")
-# This is the name of the file expected inside the container
 INPUT_JSON_FILENAME = "projects.json"
 
 def send_json_to_rabbitmq():
