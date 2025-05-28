@@ -1,9 +1,9 @@
 # worker-stack.yaml
 services:
   worker:
-    image: fredrikforsman15/de2:v2  # Or your specific worker image
+    image: fredrikforsman15/de2:v2 
     environment:
-      RABBITMQ_HOST: "192.168.2.68"    # IP of your RabbitMQ Broker VM
+      RABBITMQ_HOST: "192.168.2.97"    # IP RabbitMQ Broker VM
       RABBITMQ_QUEUE: "project_queue"
     volumes:
       - test_summary:/summary  # Mount the NFS volume
@@ -15,9 +15,9 @@ services:
         max_replicas_per_node: 2
 
 volumes:
-  test_summary:   # Volume for test summaries (passed/failed + worker_id) 
+  test_summary:   # Volume for the results
     driver: local
     driver_opts:
       type: "nfs"
-      o: "addr=192.168.2.68,rw" # NFS server address (broker) + read/write
+      o: "addr=192.168.2.97,rw" 
       device: ":/home/ubuntu/exports/test_summary" # Export path to the NFS server
