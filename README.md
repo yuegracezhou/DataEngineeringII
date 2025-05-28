@@ -100,12 +100,20 @@ Each worker:
 
 ```json
 {
-  "project_name": "example",
-  "status": "mvn_test_success",
-  "passed": 9,
-  "failed_plus_errors": 1,
+  "project_name": "database-rider",
+  "clone_url": "https://github.com/database-rider/database-rider.git",
+  "node_id_or_worker_hostname": "25888535aa12",
+  "status": "mvn_test_failed_rc1",
+  "mvn_exit_code": 1,
+  "tests_run": 12,
+  "passed": 12,
+  "failed_plus_errors": 0,
   "skipped": 0,
-  "duration": 112.5
+  "processing_start_time_monotonic": 41872.376747305,
+  "processing_end_time_monotonic": 42065.114039133,
+  "processing_start_absolute_epoch": 1748296613.4403028,
+  "processing_end_absolute_epoch": 1748296806.1775956,
+  "total_processing_duration_seconds": 192.73729182799434
 }
 ```
 
