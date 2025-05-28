@@ -173,14 +173,4 @@ Crawler `.env` files define search queries, token, pagination, etc.
 
 ---
 
-🔎 Useful Links
-
-🔍 Crawler Details: [`project/crawler/README_EN.md`](./project/crawler/README_EN.md)
-
-📊 Full Project Report: [`docs/Data_Engineering_II_report.pdf`](./docs/Data_Engineering_II_report.pdf)
-
-✏️ Author: Yue Zhou & Group 17 (Uppsala University)
-
----
-
 Thank you for checking out our project!
