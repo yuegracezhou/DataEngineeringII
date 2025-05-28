@@ -1,92 +1,169 @@
 # 🧪 DataEngineeringII Project – Group 17
 
-### ⚙️ Demonstration of Horizontal Scaling with Lightweight Virtualization for Large-Scale Unit Test Analysis of Open-Source Projects
+Group members: Fredrik Forsman, Nathalie Borglund, Tingting Lyu, Yujia Liu, Yue Zhou
 
-### 🔑 Key Words  
-**Distributed Computing Infrastructures**, **Scalability**, **Orchestration**, **Software Deployment**
+## ⚙️ Goal
 
----
+Scalable, distributed unit testing on 1,000+ open-source Java projects using containerized Python workers, Maven, RabbitMQ, and Docker Swarm.
 
-## 📘 Project Overview
+## 🔧 Key Technologies
 
-Analyzing large-scale open-source projects is an active research area that helps researchers understand real-world development issues. However, dealing with the large corpus of code is time-consuming, especially when the analysis is done at runtime.
-
-To address this, our project aims to:
-
-- Develop a scalable framework for analyzing open-source Java projects.
-- Optimize unit test execution using lightweight virtualization and container orchestration.
-- Focus on **automation**, **contextualization**, and **orchestration** of project execution.
-
-We target **1000 Java projects** that:
-
-- Use the **Maven** build system (`pom.xml`)
-- Contain **unit tests** (`src/test/java`)
+Docker Swarm • RabbitMQ • GitHub REST API • Python • Maven • NFS
 
 ---
 
-## 🧱 Architecture Goals
+## 🛠️ System Architecture
 
-- ✅ Design a **scalable architecture** to enable horizontal scaling.
-- ✅ Implement **automation** for task deployment and execution.
-- ✅ Enable **contextualization** for efficient VM/container configuration.
-- ✅ Integrate **orchestration** to manage distributed workloads.
+This project deploys a 5-VM Docker Swarm architecture:
 
-Recommended scalability tests:
+* **VM1**: Swarm Manager + Crawlers
+* **VM2**: RabbitMQ Broker + NFS Server
+* **VM3-VM5**: Worker nodes for parallel test execution
 
-- 🔹 Strong scalability  
-- 🔹 Weak scalability
+Each component is containerized and coordinated via a message queue.
 
----
-
-## 🔍 Part 1 – GitHub Java Project Crawler
-
-This repository contains a Python-based crawler that uses the GitHub REST API to find and filter Java repositories.
-
-### 📦 Features
-
-- Queries GitHub using the [GitHub REST API](https://docs.github.com/en/rest)
-- Filters projects using Maven and checks for unit tests
-- Outputs the result in JSON format
-- Designed as the first step of a distributed framework
+> [View Architecture Diagram](docs/architecture.png) (if available)
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Quick Start
 
-### 1. Clone the Repository
+### 1. Clone the Project
 
 ```bash
 git clone https://github.com/yuegracezhou/DataEngineeringII.git
 cd DataEngineeringII
 ```
 
-### 2. Create and Activate Virtual Environment
+### 2. Run Crawlers (GitHub Project Collection)
 
-```
-python3 -m venv github_env
-source github_env/bin/activate
-```
-### 3. Install Dependencies
+* Navigate to [`project/crawler`](./project/crawler/README_EN.md)
+* Use `docker-compose` to start multiple crawlers with `.env` configs
 
-```
-pip install -r requirements.txt
+```bash
+docker compose up -d
 ```
 
-### 4. Run the Crawler
+Each crawler collects Java projects with Maven + test folders and streams metadata to RabbitMQ.
 
-```
-python github_crawler.py
-```
+### 3. Publish JSON to Queue (Offline Mode)
 
-### Output
-
+```bash
+cd project/crawler
+python publisher.py  # Sends projects.json to RabbitMQ
 ```
-projects.json
-downloaded_projects
-```
----
-
-📌 **Requires Python 3.10 or above**  
-✅ **Tested on Python 3.10.12**
 
 ---
+
+## 🚧 Deploy Worker Services
+
+### Option 1: 🤝 Swarm Mode (Recommended)
+
+```bash
+docker stack deploy -c worker-stack.yml worker_stack
+```
+
+* Deploys 3+ replicas of test workers
+* Configured with:
+
+  * `RABBITMQ_HOST`
+  * NFS-mounted `/summary` volume
+
+### Option 2: 🔢 Local Test via Docker Compose
+
+```bash
+cd project/worker
+docker compose up -d
+```
+
+* For debugging or VM-local runs
+
+---
+
+## 🧰 Worker Logic (`worker.py`)
+
+Each worker:
+
+* Consumes one project/job from `project_queue`
+* Clones GitHub repo with timeout (240s)
+* Runs `mvn test` with timeout (360s)
+* Parses logs to extract test stats
+* Writes:
+
+  * Raw logs → `/results/`
+  * JSON summary → `/summary/`
+* Sends ACK/NACK to RabbitMQ with detailed status
+
+> Sample summary:
+
+```json
+{
+  "project_name": "example",
+  "status": "mvn_test_success",
+  "passed": 9,
+  "failed_plus_errors": 1,
+  "skipped": 0,
+  "duration": 112.5
+}
+```
+
+---
+
+## 📈 Performance Results
+
+### Strong Scalability
+
+| Nodes | Projects | Time   | Speed    |
+| ----- | -------- | ------ | -------- |
+| 3     | 988      | 4h 52m | 1.13/min |
+| 6     | 988      | 2h 42m | 1.97/min |
+
+**74% faster**, with **1.80x speedup** (ideal: 2.0x)
+
+### Weak Scalability
+
+| Nodes | Projects | Time   | Speed    |
+| ----- | -------- | ------ | -------- |
+| 3     | 500      | 2h 49m | 2.96/min |
+| 6     | 1000     | 2h 30m | 6.64/min |
+
+**Consistent timing** with doubled workload. **124% speedup** in throughput.
+
+---
+
+## 📂 Project Structure
+
+```
+project/
+├── crawler/           # GitHub metadata collectors
+│   ├── README_EN.md   # Module-specific docs
+│   └── publisher.py   # Sends JSON to RabbitMQ
+├── worker/            # Unit test runners
+│   ├── newer_worker.py
+│   ├── Dockerfile
+│   └── docker-compose.yml
+├── worker-stack.yml   # Swarm deploy config
+└── docker-compose.yml # Crawler multi-container config
+```
+
+---
+
+## 🛡️ Environment Variables
+
+All components use `.env` files. Key fields:
+
+```env
+RABBITMQ_HOST=192.168.2.97
+RABBITMQ_QUEUE=project_queue
+```
+
+Crawler `.env` files define search queries, token, pagination, etc.
+
+---
+
+## 🔎 Useful Links
+
+* 🔍 Crawler Details: [`project/crawler/README_EN.md`](./project/crawler/README_EN.md)
+---
+
+Thank you for checking out our project!
