@@ -2,7 +2,7 @@
 
 Group Members: Fredrik Forsman, Tingting Lyu, Nathalie Borglund, Yujia Liu, Yue Zhou
 
-> Thank you all for your valuable contributions and great teamwork throughout the project!
+> Thank you all for your contributions and great teamwork throughout the project!
 
 ## ⚙️ Goal
 
