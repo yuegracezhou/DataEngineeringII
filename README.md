@@ -2,8 +2,6 @@
 
 Group Members: Fredrik Forsman, Tingting Lyu, Nathalie Borglund, Yujia Liu, Yue Zhou
 
-> Thank you all for your contributions and great teamwork throughout the project!
-
 ## ⚙️ Goal
 
 Scalable, distributed unit testing on 1,000+ open-source Java projects using containerized Python workers, Maven, RabbitMQ, and Docker Swarm.
