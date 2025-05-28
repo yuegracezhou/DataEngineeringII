@@ -22,7 +22,7 @@ This project deploys a 5-VM Docker Swarm architecture:
 
 Each component is containerized and coordinated via a message queue.
 
-> [View Architecture Diagram](docs/architecture.png) (if available)
+![System Architecture Diagram](figures/architecture.jpg)
 
 ---
 
@@ -37,7 +37,7 @@ cd DataEngineeringII
 
 ### 2. Run Crawlers (GitHub Project Collection)
 
-* Navigate to [`project/crawler`](./project/crawler/README_EN.md)
+* 🔍 Crawler Details: [`project/crawler/README_EN.md`](./project/crawler/README_EN.md)
 * Use `docker-compose` to start multiple crawlers with `.env` configs
 
 ```bash
@@ -120,6 +120,8 @@ Each worker:
 
 **74% faster**, with **1.80x speedup** (ideal: 2.0x)
 
+![System Architecture Diagram](figures/strong_scalability.jpg)
+
 ### Weak Scalability
 
 | Nodes | Projects | Time   | Speed    |
@@ -128,6 +130,8 @@ Each worker:
 | 6     | 1000     | 2h 30m | 6.64/min |
 
 **Consistent timing** with doubled workload. **124% speedup** in throughput.
+
+![System Architecture Diagram](figures/weak_scalability.jpg)
 
 ---
 
@@ -159,11 +163,6 @@ RABBITMQ_QUEUE=project_queue
 
 Crawler `.env` files define search queries, token, pagination, etc.
 
----
-
-## 🔎 Useful Links
-
-* 🔍 Crawler Details: [`project/crawler/README_EN.md`](./project/crawler/README_EN.md)
 ---
 
 Thank you for checking out our project!
