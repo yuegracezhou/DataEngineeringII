@@ -22,7 +22,7 @@ This project deploys a 5-VM Docker Swarm architecture:
 
 Each component is containerized and coordinated via a message queue.
 
-![System Architecture Diagram](figures/architecture.jpg)
+![System Architecture Diagram](./images/architecture.jpg)
 
 ---
 
@@ -120,7 +120,7 @@ Each worker:
 
 **74% faster**, with **1.80x speedup** (ideal: 2.0x)
 
-![System Architecture Diagram](figures/strong_scalability.jpg)
+![System Architecture Diagram](./images/strong_scalability.jpg)
 
 ### Weak Scalability
 
@@ -131,7 +131,7 @@ Each worker:
 
 **Consistent timing** with doubled workload. **124% speedup** in throughput.
 
-![System Architecture Diagram](figures/weak_scalability.jpg)
+![System Architecture Diagram](./images/weak_scalability.jpg)
 
 ---
 
