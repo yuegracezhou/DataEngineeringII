@@ -3,7 +3,7 @@ services:
   crawler1:
     build: .
     environment:
-      - GITHUB_TOKEN=${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}
+      - GITHUB_TOKEN=######
       - RABBITMQ_HOST=broker
       - RABBITMQ_QUEUE=project_queue
       - START_PAGE=1
@@ -15,7 +15,7 @@ services:
   crawler2:
     build: .
     environment:
-      - GITHUB_TOKEN=${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}
+      - GITHUB_TOKEN=######
       - RABBITMQ_HOST=broker
       - RABBITMQ_QUEUE=project_queue
       - START_PAGE=2
